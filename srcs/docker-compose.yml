@@ -1,6 +1,7 @@
 services:
   mariadb:
     container_name: mariadb
+    image: mariadb
     networks:
       - inception
     build:
@@ -15,6 +16,7 @@ services:
       - "3306"
   nginx:
     container_name: nginx
+    image: nginx
     networks:
       - inception
     depends_on:
@@ -31,6 +33,7 @@ services:
     restart: on-failure
   wordpress:
     container_name: wordpress
+    image: wordpress
     networks:
       - inception
     depends_on:
@@ -51,14 +54,15 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/Users/thole/data/wordpress'
+      device: '/home/thole/data/wordpress'
   mariadb:
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/Users/thole/data/mariadb'
+      device: '/home/thole/data/mariadb'
 
 networks:
   inception:
+    name: inception
     driver: bridge

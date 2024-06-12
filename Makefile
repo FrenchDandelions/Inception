@@ -1,4 +1,4 @@
-VOLUMES := /Users/thole/data
+VOLUMES := /home/thole/data
 RED = \033[1;31m
 GREEN = \033[1;32m
 YELLOW = \033[1;33m
@@ -51,11 +51,13 @@ down:
 	@echo "$(RED)██████████████████ Removing All Containers ██████████████████$(RESET)"
 	docker-compose -f ./srcs/docker-compose.yml down --volumes
 
-reload: down rvolumes build up
+reload: down build up
+
+reset: rm build up
 
 rm: rvolumes down
 	@echo "$(RED)█████████████████████ Remove Everything ██████████████████████$(RESET)"
-	docker system prune -a
+	docker system prune -a -f
 
 rvolumes:
 	@echo "$(RED)█████████████████████ Deleting volumes ██████████████████████$(RESET)"
