@@ -31,6 +31,12 @@ mariadb -uroot -p"$SQL_ROOT_PASSWORD" -e "ALTER USER 'root'@'localhost' IDENTIFI
 echo "Verifying root password change..."
 mariadb -uroot -p"$SQL_ROOT_PASSWORD" -e "SELECT User, Host, Password FROM mysql.user WHERE User='root';"
 
+# Verify that the database and users were set up correctly
+echo "Showing databases..."
+mariadb -uroot -p"$SQL_ROOT_PASSWORD" -e "SHOW DATABASES;"
+echo "Showing Users..."
+mariadb -uroot -p"$SQL_ROOT_PASSWORD" -e "SELECT user FROM mysql. user;"
+
 # Shut down MariaDB, waiting for all slaves to catch up
 echo "Shutting down MariaDB..."
 mariadb-admin -uroot -p"$SQL_ROOT_PASSWORD" --wait-for-all-slaves shutdown
